@@ -12,7 +12,7 @@ PLATFORM=linux64
 
 if [ -f $ENV_DIR/FIREFOX_VERSION ]; then
   VERSION=$(cat $ENV_DIR/FIREFOX_VERSION)
-  echo "-----> Firefox version defined as: v${VERSION}"
+  topic "-----> Firefox version defined as: v${VERSION}"
 else
   VERSION=latest
 fi
@@ -24,11 +24,33 @@ BUILDPACK_FIREFOX_PACKAGE="https://download.mozilla.org/?product=firefox-${VERSI
 
 mkdir -p $CACHE_DIR
 if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
-  echo "-----> Fetching Firefox package from ${BUILDPACK_FIREFOX_PACKAGE}"
+  topic "-----> Fetching Firefox package from ${BUILDPACK_FIREFOX_PACKAGE}"
   curl -s $BUILDPACK_FIREFOX_PACKAGE -L -o $CACHE_DIR/$FILE_NAME
 fi
 
-echo "-----> Extracting Firefox binaries to ${BUILD_DIR}/vendor/${ARCHIVE_NAME}"
+PACKAGES="
+  libgtk-3-0
+"
+APT_CACHE_DIR="$CACHE_DIR/apt/cache"
+APT_STATE_DIR="$CACHE_DIR/apt/state"
+APT_OPTIONS="-o debug::nolocking=true -o dir::cache=$APT_CACHE_DIR -o dir::state=$APT_STATE_DIR"
+apt-get $APT_OPTIONS update | indent
+
+topic "-----> Installing needed packages"
+for PACKAGE in $PACKAGES; do
+  if [[ $PACKAGE == *deb ]]; then
+    PACKAGE_NAME=$(basename $PACKAGE .deb)
+    PACKAGE_FILE=$APT_CACHE_DIR/archives/$PACKAGE_NAME.deb
+
+    topic "Fetching $PACKAGE"
+    curl -s -L -z $PACKAGE_FILE -o $PACKAGE_FILE $PACKAGE 2>&1 | indent
+  else
+    topic "Fetching .debs for $PACKAGE"
+    apt-get $APT_OPTIONS -y --force-yes -d install --reinstall $PACKAGE | indent
+  fi
+done
+
+topic "-----> Extracting Firefox binaries to ${BUILD_DIR}/vendor/${ARCHIVE_NAME}"
 mkdir -p $CACHE_DIR/$ARCHIVE_NAME
 mkdir -p $BUILD_DIR/vendor
 tar jxf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR
