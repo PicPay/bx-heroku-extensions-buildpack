@@ -1,4 +1,4 @@
-# Heroku buildpack: installation of binanies not present on Heroku.
+# Binaries not present on Heroku.
 
 # Usage
 
