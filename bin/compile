@@ -22,6 +22,6 @@ echo $APT_OPTIONS
 apt-get $APT_OPTIONS update
 
 echo "-----> Installing needed packages"
-apt-get $APT_OPTIONS -y -d install --reinstall gdebi xserver-xorg-core libgl1-mesa-dri xvfb libglide3 unzip
+apt-get $APT_OPTIONS -y -d install --reinstall gdebi xserver-xorg-core libgl1-mesa-dri xvfb libglide3 unzip firefox
 # wget https://cloud.gastecnologia.com.br/gas/diagnostico/warsaw_setup_64.deb -O /tmp/warsaw.deb
 # gdebi --non-interactive --option=$APT_OPTIONS /tmp/warsaw.deb
