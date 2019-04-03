@@ -1,4 +1,4 @@
 #!/bin/sh
 
-echo "firefox"
+echo "Selenium"
 exit 0
