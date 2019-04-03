@@ -38,6 +38,3 @@ apt-get $APT_OPTIONS update
 apt-get $APT_OPTIONS -y -d install --reinstall gdebi xserver-xorg-core libgl1-mesa-dri xvfb libglide3 unzip libgtk-3-0
 # wget https://cloud.gastecnologia.com.br/gas/diagnostico/warsaw_setup_64.deb -O /tmp/warsaw.deb
 # gdebi --non-interactive --option=$APT_OPTIONS /tmp/warsaw.deb
-
-apt-get -o debug::nolocking=true -o dir::cache=/app/apt/cache -o dir::state=/app/apt/state update
-apt -o debug::nolocking=true -o dir::cache=/app/apt/cache -o dir::state=/app/apt/state search gtk
