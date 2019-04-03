@@ -1,35 +1,18 @@
-# Heroku buildpack: Firefox
-
-This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for [Firefox](http://www.mozilla.org/en-US/firefox/new/). Meant to be used in combination with something like xvfb, for headless operation.
+# Heroku buildpack: installation of binanies not present on Heroku.
 
 # Usage
 
 Example usage:
 
 ```shell
-$ heroku create [appname] --buildpack http://github.com/buitron/firefox-buildpack
-
-# or if your app is already created:
-$ heroku buildpacks:add http://github.com/buitron/firefox-buildpack
-
-$ git push heroku master
+$ heroku buildpacks:add https://github.com/bxblue/heroku-extensions-buildpack
 ```
 
-## Configuring the downloaded version of Firefox
+## Env vars
 
-By default, this buildback will download the latest release which is provided
-by [Firefox](https://www.mozilla.org/en-US/firefox/releases/).
-
-You can control the specific version by setting the `FIREFOX_VERSION` variable to an explicit version e.g. `63.0`.
-
-## Note
-
-If you're using [heroku-buildpack-multi](https://devcenter.heroku.com/articles/using-multiple-buildpacks-for-an-app) to include other buildpacks, you should set environment variable by your own to include following paths.
-
-    PATH="/usr/local/bin:/usr/bin:/bin:/app/vendor/firefox"
-    LD_LIBRARY_PATH="/usr/local/lib:/usr/lib:/lib:/app/vendor/firefox"
-
-
+```shell
+PATH="/usr/local/bin:/usr/bin:/bin:/app/vendor/firefox"
+LD_LIBRARY_PATH="/usr/local/lib:/usr/lib:/lib:/app/vendor/firefox"
+```
 <!-- ## Credit
-
 I cloned a portion of this code from @bensomers so that I can configure the variables to create a recent buildpack for Heroku. -->
