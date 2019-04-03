@@ -35,6 +35,6 @@ mkdir -p "$APT_STATE_DIR/lists/partial"
 
 echo "-----> Installing needed packages"
 apt-get $APT_OPTIONS update
-apt-get $APT_OPTIONS -y -d install --reinstall gdebi xserver-xorg-core libgl1-mesa-dri xvfb libglide3 unzip firefox
+apt-get $APT_OPTIONS -y install gdebi xserver-xorg-core libgl1-mesa-dri xvfb libglide3 unzip firefox
 # wget https://cloud.gastecnologia.com.br/gas/diagnostico/warsaw_setup_64.deb -O /tmp/warsaw.deb
 # gdebi --non-interactive --option=$APT_OPTIONS /tmp/warsaw.deb
