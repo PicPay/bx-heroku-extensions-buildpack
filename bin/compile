@@ -35,7 +35,7 @@ mkdir -p "$APT_STATE_DIR/lists/partial"
 
 echo "-----> Installing needed packages"
 apt-get $APT_OPTIONS update
-apt-get $APT_OPTIONS -y -d install gdebi xserver-xorg-core libgl1-mesa-dri xvfb libglide3 unzip firefox libcairo-gobject2 libxt6
+apt-get $APT_OPTIONS --reinstall -y -d install gdebi xserver-xorg-core libgl1-mesa-dri xvfb libglide3 unzip firefox libcairo-gobject2 libxt6
 
 mkdir -p $BUILD_DIR/.apt
 
