@@ -44,7 +44,7 @@ for DEB in $(ls -1 $APT_CACHE_DIR/archives/*.deb); do
   dpkg -x $DEB $BUILD_DIR/.apt/
 done
 
-rm -rf $CACHE_DIR
+rm -rf $CACHE_DIR/.apt
 
 export PATH="$BUILD_DIR/.apt/usr/bin:$PATH"
 export LD_LIBRARY_PATH="$BUILD_DIR/.apt/usr/lib:$LD_LIBRARY_PATH"
